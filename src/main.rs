@@ -23,14 +23,15 @@ fn main() {
 
 fn arm_thrusters(nav: &mut Navigator) {
     let channels = [PwmChannel::Ch1, PwmChannel::Ch2];
+    nav.set_pwm_enable(true);
     // send esc init signal
     nav.set_pwm_channels_value(&channels, 1500);
-    sleep(Duration::from_secs(1));
+    sleep(Duration::from_millis(700));
 }
 
 fn move_forward(nav: &mut Navigator, duration: Duration) {
     let channels = [PwmChannel::Ch1, PwmChannel::Ch2];
-    let values = [1450, 1550];
+    let values = [1300, 1550];
     nav.set_pwm_channels_values(&channels, &values);
     sleep(duration);
 }
@@ -39,5 +40,6 @@ fn stop_thrusters(nav: &mut Navigator) {
     let channels = [PwmChannel::Ch1, PwmChannel::Ch2];
 
     nav.set_pwm_channels_value(&channels, 1500);
+    sleep(Duration::from_millis(700));
     nav.set_pwm_enable(false);
 }
