@@ -8,6 +8,9 @@ fn main() {
 
     println!("Navigator initiliased");
 
+    // startup delay
+    sleep(Duration::from_secs(5));
+
     arm_thrusters(&mut nav);
     move_forward(&mut nav, Duration::from_secs(5));
     stop_thrusters(&mut nav);
@@ -23,7 +26,6 @@ fn arm_thrusters(nav: &mut Navigator) {
 fn move_forward(nav: &mut Navigator, duration: Duration) {
     let channels = [PwmChannel::Ch1, PwmChannel::Ch2];
     let values = [1450, 1550];
-
     nav.set_pwm_channels_values(&channels, &values);
     sleep(duration);
 }
